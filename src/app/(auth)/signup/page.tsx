@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const router = useRouter();
   const [responseMessage, setResponseMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -20,12 +22,14 @@ const RegisterPage = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify(formData),
       });
+      setIsLoading(false);
       if (response.status === 409) {
         setResponseMessage("This email already exists!");
         setIsError(true);
@@ -135,15 +139,15 @@ const RegisterPage = () => {
             type="submit"
             className="block w-full rounded-lg px-5 py-3 text-sm font-medium bg-customPurple text-white hover:bg-customPurpleHover"
           >
-            Sign up
+            {isLoading ? "Loading..." : "Sign up"}
           </button>
 
           <p className="text-center text-sm text-white-500">
             Already have an account?
             <br />
-            <a className="underline" href="/login">
+            <Link className="underline" href="/login">
               Sign in
-            </a>
+            </Link>
           </p>
         </form>
       </div>

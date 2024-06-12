@@ -1,12 +1,16 @@
 "use client";
+import { useState } from "react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 const LogoutPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const handleConfirm = async () => {
+    setIsLoading(true);
     await signOut({
       callbackUrl: "/",
     });
+    setIsLoading(false);
   };
 
   return (
@@ -23,7 +27,7 @@ const LogoutPage = () => {
               className="block w-full rounded-lg px-5 py-3 text-sm font-medium bg-customPurple text-white hover:bg-customPurpleHover"
               onClick={handleConfirm}
             >
-              Confirm
+              {isLoading ? "Loading..." : "Confirm"}
             </button>
             <Link
               className="block w-full rounded-lg px-5 py-3 text-sm font-medium bg-customPurple text-white hover:bg-customPurpleHover text-center"

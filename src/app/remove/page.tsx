@@ -10,6 +10,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 const RemoveBackgroundPage = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [resultImageUrl, setResultImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [resultRemoveBg, setRemoveBg] = useState<string | null>(null);
 
   const router = useRouter();
@@ -21,6 +22,7 @@ const RemoveBackgroundPage = () => {
 
   const handleRemoveBg = async () => {
     if (!selectedFile) return;
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("size", "auto");
@@ -40,6 +42,7 @@ const RemoveBackgroundPage = () => {
         },
         encoding: null,
       });
+      setIsLoading(false);
 
       if (response.status !== 200) {
         console.error("Erreur :", response.status, response.statusText);
@@ -85,7 +88,7 @@ const RemoveBackgroundPage = () => {
             !selectedFile ? "cursor-not-allowed" : "hover:bg-customPurpleHover"
           } ${resultRemoveBg ? `hidden` : ``}`}
         >
-          Remove background
+          {isLoading ? "Loading..." : "Remove background"}
         </button>
         {resultRemoveBg ? (
           <div className="relative">

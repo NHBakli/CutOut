@@ -2,11 +2,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const loginPage = () => {
   const router = useRouter();
   const [responseMessage, setResponseMessage] = useState("");
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,6 +23,7 @@ const loginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     setIsError(false);
 
     const result = await signIn("credentials", {
@@ -28,6 +31,7 @@ const loginPage = () => {
       password: formData.password,
       redirect: false,
     });
+    setIsLoading(false);
 
     if (result) {
       router.push("/");
@@ -109,14 +113,14 @@ const loginPage = () => {
             type="submit"
             className="block w-full rounded-lg px-5 py-3 text-sm font-medium bg-customPurple text-white hover:bg-customPurpleHover"
           >
-            Sign in
+            {isLoading ? "Loading..." : "Sign in"}
           </button>
 
           <p className="text-center text-sm text-white-500">
             You don't have an account? <br />
-            <a className="underline" href="/signup">
+            <Link className="underline" href="/signup">
               Sign up
-            </a>
+            </Link>
           </p>
         </form>
       </div>
