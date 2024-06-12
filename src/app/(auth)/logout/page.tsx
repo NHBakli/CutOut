@@ -12,7 +12,7 @@ const LogoutPage = () => {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg bg ">
-        <div className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-gradient-to-r from-violet-600 to-fuchsia-600 ">
+        <div className=" mt-48 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-gradient-to-r from-violet-600 to-fuchsia-600">
           <h1 className="text-center text-2xl font-bold sm:text-4xl text-white ">
             Logout
           </h1>

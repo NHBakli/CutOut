@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import UpdateProfile from "@/components/ProfileUpdateForm";
-
 interface User {
   id: number;
   username: string;

@@ -2,27 +2,44 @@
 
 import { FileInput, Label } from "flowbite-react";
 import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface ComponentProps {
   onFileChange: (file: File) => void;
+  className: string;
 }
 
-export function Component({ onFileChange }: ComponentProps) {
+export function Component({ onFileChange, className }: ComponentProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const router = useRouter();
+  const { data } = useSession();
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      setSelectedFile(file);
-      onFileChange(file);
+    if (data) {
+      if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+        onFileChange(file);
+      }
+    } else {
+      router.push("/login");
     }
   };
 
   return (
-    <div className="flex w-1/2 items-center justify-center">
+    <div
+      className={`${
+        className
+          ? `${className}`
+          : `flex w-full items-center justify-center space-x-4 `
+      }`}
+    >
       <Label
         htmlFor="dropzone-file"
-        className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed bg-customPurple hover:bg-customPurpleHover"
+        className="flex h-64 w-1/2 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed bg-customPurple hover:bg-customPurpleHover"
       >
         <div className="flex flex-col items-center justify-center pb-6 pt-5">
           <svg
@@ -52,6 +69,17 @@ export function Component({ onFileChange }: ComponentProps) {
           onChange={handleFileChange}
         />
       </Label>
+      {selectedFile && (
+        <div className="flex flex-col items-center w-auto">
+          <Image
+            src={URL.createObjectURL(selectedFile)}
+            alt="Selected Image"
+            width={350}
+            height={350}
+            className="rounded-lg"
+          />
+        </div>
+      )}
     </div>
   );
 }

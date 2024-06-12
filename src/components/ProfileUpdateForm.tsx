@@ -37,19 +37,15 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
   };
 
   return (
-    <section className="bg-purple-600  rounded-3xl">
-      <div className="lg:grid min-h-full mt-36 lg:grid-cols-12">
-        <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
-          {/* ici les images de l'user en carousel */}
-        </aside>
-
+    <section className="bg-purple-600  rounded-3xl w-1/2 ml-auto mr-auto">
+      <div className=" min-h-full mt-32 ">
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
           <div className="max-w-xl lg:max-w-3xl">
-            <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white">
+            <h1 className="mt-6 text-2xl font-bold sm:text-3xl md:text-4xl text-white text-center">
               Welcome to Profile 👤
             </h1>
 
-            <p className="mt-4 leading-relaxed text-white">
+            <p className="mt-4 leading-relaxed text-white ">
               Welcome to your profile page! Here, you can update your personal
               information such as your username, email address. Please make sure
               to keep your information up to date to ensure you receive all
@@ -57,7 +53,7 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
             </p>
 
             <div className="mt-8 grid grid-cols-6 gap-6">
-              <div className="col-span-6 sm:col-span-3">
+              <div className="col-span-6 w-1/2">
                 <label
                   htmlFor="Username"
                   className="block text-sm font-medium text-white"
@@ -75,7 +71,7 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
                 />
               </div>
 
-              <div className="col-span-6">
+              <div className="col-span-6 w-1/2">
                 <label
                   htmlFor="Email"
                   className="block text-sm font-medium text-white"
@@ -89,7 +85,7 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-1/2 rounded-lg border-gray-200 p-4 text-sm shadow-sm text-black"
+                  className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm text-black"
                 />
               </div>
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">

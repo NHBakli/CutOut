@@ -7,8 +7,7 @@ const prisma = new PrismaClient();
 
 export const GET = async (req: Request) => {
   try {
-    const res: any = {};
-    const session = await getServerSession({ req, res, ...authOptions });
+    const session = await getServerSession({ req, ...authOptions });
 
     if (!session) {
       return NextResponse.json(
@@ -31,8 +30,6 @@ export const GET = async (req: Request) => {
         id: true,
         username: true,
         email: true,
-        images: true,
-        credits: true,
       },
     });
 
