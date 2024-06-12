@@ -81,8 +81,8 @@ const RemoveBackgroundPage = () => {
         <button
           onClick={handleRemoveBg}
           disabled={!selectedFile}
-          className={`px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-400 ${
-            !selectedFile ? "cursor-not-allowed" : ""
+          className={`px-4 py-2 bg-customPurple text-white rounded disabled:bg-gray-400 ${
+            !selectedFile ? "cursor-not-allowed" : "hover:bg-customPurpleHover"
           } ${resultRemoveBg ? `hidden` : ``}`}
         >
           Remove background

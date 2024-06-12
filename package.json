@@ -26,7 +26,8 @@
     "next-auth": "^4.24.7",
     "node-fetch": "^3.3.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
